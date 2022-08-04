@@ -1,0 +1,10 @@
+.places__sign {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  grid-area: places__title;
+  padding: 25px 15px 31px 21px;
+  border-radius: 0px 0px 10px 10px;
+  min-width: 282px;
+  box-sizing: border-box;
+}

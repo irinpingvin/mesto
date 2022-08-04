@@ -1,0 +1,5 @@
+.places {
+  padding-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+}
