@@ -1,0 +1,7 @@
+@media screen and (min-width: 1024px) {
+  .profile__personal-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
