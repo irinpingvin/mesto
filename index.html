@@ -13,63 +13,89 @@
   </header>
   <main class="content">
     <section class="profile section">
-      <div class="profile__info">
-        <img class="profile__avatar" src="./images/profile__avatar.png" alt="">
-        <div class="profile__personal-data">
-          <h2 class="profile__name">Жак-Ив Кусто<img class="profile__edit-button" src="./images/profile__edit-button.png" alt="">
-          </h2>
-          <p class="profile__description">Исследователь океана</p>
+      <img class="profile__avatar" src="./images/profile__avatar.png" alt="">
+      <div class="profile__personal-data">
+        <div class="profile__name-editor">
+          <h2 class="profile__name">Жак-Ив Кусто</h2>
+          <button class="profile__edit-button"></button>
         </div>
+        <p class="profile__description">Исследователь океана</p>
       </div>
-      <img class="profile__add-button" src="./images/profile__add-button.png" alt="">
+      <button class="profile__add-button"></button>
     </section>
     <section class="places section">
-      <article class="places__item">
-        <img class="places__pic" src="./images/places__bogdo.png" alt="">
-        <div class="places__sign">
-          <h2 class="places__title">Гора Большое Богдо</h2>
-          <img src="./images/places__like.svg" alt="" class="places__like-button">
-        </div>
-      </article>
-      <article class="places__item">
-        <img class="places__pic" src="./images/places__curonian-spit.png" alt="">
-        <div class="places__sign">
-          <h2 class="places__title">Куршская коса</h2>
-          <img src="./images/places__like.svg" alt="" class="places__like-button">
-        </div>
-      </article>
-      <article class="places__item">
-        <img class="places__pic" src="./images/places__dombay.png" alt="">
-        <div class="places__sign">
-          <h2 class="places__title">Домбай</h2>
-          <img src="./images/places__like.svg" alt="" class="places__like-button">
-        </div>
-      </article>
-      <article class="places__item">
-        <img class="places__pic" src="./images/places__elbrus.png" alt="">
-        <div class="places__sign">
-          <h2 class="places__title">Гора Эльбрус</h2>
-          <img src="./images/places__like.svg" alt="" class="places__like-button">
-        </div>
-      </article>
-      <article class="places__item">
-        <img class="places__pic" src="./images/places__ruskeala.png" alt="">
-        <div class="places__sign">
-          <h2 class="places__title">Парк Рускеала</h2>
-          <img src="./images/places__like.svg" alt="" class="places__like-button">
-        </div>
-      </article>
-      <article class="places__item">
-        <img class="places__pic" src="./images/places__konduki.png" alt="">
-        <div class="places__sign">
-          <h2 class="places__title">Кондуки</h2>
-          <img src="./images/places__like.svg" alt="" class="places__like-button">
-        </div>
-      </article>
+      <ul class="places__list">
+        <li>
+          <article class="place">
+            <img class="place__pic" src="./images/places__bogdo.png" alt="">
+            <div class="place__sign">
+              <h2 class="place__title">Гора Большое Богдо</h2>
+              <button class="place__like-button"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="place">
+            <img class="place__pic" src="./images/places__dombay.png" alt="">
+            <div class="place__sign">
+              <h2 class="place__title">Домбай</h2>
+              <button class="place__like-button"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="place">
+            <img class="place__pic" src="./images/places__curonian-spit.png" alt="">
+            <div class="place__sign">
+              <h2 class="place__title">Куршская коса</h2>
+              <button class="place__like-button"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="place">
+            <img class="place__pic" src="./images/places__elbrus.png" alt="">
+            <div class="place__sign">
+              <h2 class="place__title">Гора Эльбрус</h2>
+              <button class="place__like-button"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="place">
+            <img class="place__pic" src="./images/places__ruskeala.png" alt="">
+            <div class="place__sign">
+              <h2 class="place__title">Парк Рускеала</h2>
+              <button class="place__like-button"></button>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="place">
+            <img class="place__pic" src="./images/places__konduki.png" alt="">
+            <div class="place__sign">
+              <h2 class="place__title">Кондуки</h2>
+              <button class="place__like-button"></button>
+            </div>
+          </article>
+        </li>
+      </ul>
     </section>
     <footer class="footer section">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
   </main>
+  <section class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button"></button>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form class="popup__form">
+        <input type="text" required class="popup__name-field">
+        <input type="text" required class="popup__description-field">
+        <button type="submit" class="popup__submit-button">Сохранить</button>
+      </form>
+    </div>
+  </section>
 </div>
+<script src="./scripts/index.js"></script>
 </body>

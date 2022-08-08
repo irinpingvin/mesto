@@ -1,16 +1,9 @@
 .places {
   padding-top: 36px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
-  gap: 20px;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 640px) {
   .places {
     padding-top: 50px;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px 17px;
   }
 }

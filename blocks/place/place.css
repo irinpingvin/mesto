@@ -1,4 +1,4 @@
-.places__item {
+.place {
   display: grid;
   grid-template-columns: 282px;
   grid-template-areas:
