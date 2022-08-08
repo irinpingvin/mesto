@@ -8,6 +8,7 @@
     max-width: 581px;
   }
 }
+
 @media screen and (min-width: 1024px) {
   .section {
     max-width: 880px;

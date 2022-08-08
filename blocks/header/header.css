@@ -1,12 +1,18 @@
 .header {
   padding: 28px 0;
   border-bottom: 1px solid #545454;
-  max-width: 880px;
-  margin: 0 auto;
+}
+
+@media screen and (min-width: 640px) {
+  .header {
+    margin: 0 auto;
+    max-width: 581px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   .header {
+    max-width: 880px;
     padding-top: 45px;
     padding-bottom: 41px;
   }

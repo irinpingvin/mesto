@@ -1,16 +1,15 @@
 .popup__submit-button {
-  background-image: url(../../../images/popup__submit-button.svg);
+  background: url(../../../images/popup__submit-button.svg) no-repeat;
   width: 238px;
   height: 46px;
   object-fit: contain;
-  background-repeat: no-repeat;
   box-shadow: none;
   border: none;
   padding: 0;
   transition: opacity 0.2s linear;
 }
 
-@media screen and (min-width: 880px) {
+@media screen and (min-width: 1024px) {
   .popup__submit-button {
     width: 358px;
     height: 50px;
