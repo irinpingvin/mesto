@@ -2,7 +2,6 @@ let popup = document.querySelector('.popup');
 let popupForm = popup.querySelector('.popup__form');
 let popupNameField = popup.querySelector('.popup__name-field');
 let popupDescriptionField = popup.querySelector('.popup__description-field');
-let popupSubmitButton = popup.querySelector('.profile__submit-button');
 let popupCloseButton = popup.querySelector('.popup__close-button');
 
 let profile = document.querySelector('.profile');
