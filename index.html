@@ -17,11 +17,11 @@
       <div class="profile__personal-data">
         <div class="profile__name-editor">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button"></button>
+          <button class="profile__edit-button" type="button"></button>
         </div>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button class="profile__add-button"></button>
+      <button class="profile__add-button" type="button"></button>
     </section>
     <section class="places section">
       <ul class="places__list">
@@ -30,7 +30,7 @@
             <img class="place__pic" src="./images/places__bogdo.png" alt="Холм из известняка и глины, покрытый сухой полынью. На гору ведет деревная дорожка.">
             <div class="place__sign">
               <h2 class="place__title">Гора Большое Богдо</h2>
-              <button class="place__like-button"></button>
+              <button class="place__like-button" type="button"></button>
             </div>
           </article>
         </li>
@@ -39,7 +39,7 @@
             <img class="place__pic" src="./images/places__dombay.png" alt="Остроконечная гора с ледняком на верхушке и осенним лесом у подножья.">
             <div class="place__sign">
               <h2 class="place__title">Домбай</h2>
-              <button class="place__like-button"></button>
+              <button class="place__like-button" type="button"></button>
             </div>
           </article>
         </li>
@@ -48,7 +48,7 @@
             <img class="place__pic" src="./images/places__curonian-spit.png" alt="Деревянный настил на песке уходит в бесконечность, окруженный деревьями.">
             <div class="place__sign">
               <h2 class="place__title">Куршская коса</h2>
-              <button class="place__like-button"></button>
+              <button class="place__like-button" type="button"></button>
             </div>
           </article>
         </li>
@@ -57,7 +57,7 @@
             <img class="place__pic" src="./images/places__elbrus.png" alt="Силуэт горы на закате.">
             <div class="place__sign">
               <h2 class="place__title">Гора Эльбрус</h2>
-              <button class="place__like-button"></button>
+              <button class="place__like-button" type="button"></button>
             </div>
           </article>
         </li>
@@ -66,7 +66,7 @@
             <img class="place__pic" src="./images/places__ruskeala.png" alt="Отвесные каменные скалы с голубым озером внизу.">
             <div class="place__sign">
               <h2 class="place__title">Парк Рускеала</h2>
-              <button class="place__like-button"></button>
+              <button class="place__like-button" type="button"></button>
             </div>
           </article>
         </li>
@@ -75,7 +75,7 @@
             <img class="place__pic" src="./images/places__konduki.png" alt="Грунтовые холмы.">
             <div class="place__sign">
               <h2 class="place__title">Кондуки</h2>
-              <button class="place__like-button"></button>
+              <button class="place__like-button" type="button"></button>
             </div>
           </article>
         </li>
@@ -85,17 +85,17 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
   </main>
-  <section class="popup">
+  <div class="popup">
     <div class="popup__container">
-      <button class="popup__close-button"></button>
+      <button class="popup__close-button" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
-      <form class="popup__form">
-        <input type="text" required class="popup__name-field">
-        <input type="text" required class="popup__description-field">
+      <form class="popup__form" name="popup-submit-form">
+        <input type="text" name="popup-name" required class="popup__input popup__input_text_name">
+        <input type="text" name="popup-description" required class="popup__input popup__input_text_description">
         <button type="submit" class="popup__submit-button">Сохранить</button>
       </form>
     </div>
-  </section>
+  </div>
 </div>
 <script src="./scripts/index.js"></script>
 </body>
