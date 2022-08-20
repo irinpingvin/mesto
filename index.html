@@ -24,62 +24,7 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="places section">
-      <ul class="places__list">
-        <li>
-          <article class="place">
-            <img class="place__pic" src="./images/places__bogdo.png" alt="Холм из известняка и глины, покрытый сухой полынью. На гору ведет деревная дорожка.">
-            <div class="place__sign">
-              <h2 class="place__title">Гора Большое Богдо</h2>
-              <button class="place__like-button" type="button"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place">
-            <img class="place__pic" src="./images/places__dombay.png" alt="Остроконечная гора с ледняком на верхушке и осенним лесом у подножья.">
-            <div class="place__sign">
-              <h2 class="place__title">Домбай</h2>
-              <button class="place__like-button" type="button"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place">
-            <img class="place__pic" src="./images/places__curonian-spit.png" alt="Деревянный настил на песке уходит в бесконечность, окруженный деревьями.">
-            <div class="place__sign">
-              <h2 class="place__title">Куршская коса</h2>
-              <button class="place__like-button" type="button"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place">
-            <img class="place__pic" src="./images/places__elbrus.png" alt="Силуэт горы на закате.">
-            <div class="place__sign">
-              <h2 class="place__title">Гора Эльбрус</h2>
-              <button class="place__like-button" type="button"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place">
-            <img class="place__pic" src="./images/places__ruskeala.png" alt="Отвесные каменные скалы с голубым озером внизу.">
-            <div class="place__sign">
-              <h2 class="place__title">Парк Рускеала</h2>
-              <button class="place__like-button" type="button"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place">
-            <img class="place__pic" src="./images/places__konduki.png" alt="Грунтовые холмы.">
-            <div class="place__sign">
-              <h2 class="place__title">Кондуки</h2>
-              <button class="place__like-button" type="button"></button>
-            </div>
-          </article>
-        </li>
-      </ul>
+      <ul class="places__list"></ul>
     </section>
     <footer class="footer section">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
@@ -97,6 +42,19 @@
     </div>
   </div>
 </div>
+
+<template class="template">
+  <li>
+    <article class="place">
+      <img class="place__pic">
+      <div class="place__sign">
+        <h2 class="place__title"></h2>
+        <button class="place__like-button" type="button"></button>
+      </div>
+    </article>
+  </li>
+</template>
+
 <script src="./scripts/index.js"></script>
 </body>
 </html>
