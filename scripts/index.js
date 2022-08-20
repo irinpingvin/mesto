@@ -80,13 +80,17 @@ function addCardItem() {
 function setPopupAddCardMode() {
   popupMode = ADD_CARD;
   popupTitle.textContent = 'Новое место';
-  popupNameField.value = 'Название';
-  popupDescriptionField.value = 'Ссылка на картинку';
+  popupNameField.setAttribute('placeHolder', 'Название');
+  popupDescriptionField.setAttribute('placeHolder', 'Ссылка на картинку');
   popupSubmitButton.textContent = 'Создать';
 }
 
 function setPopupEditProfileMode() {
   popupMode = EDIT_PROFILE;
+  if (popupNameField.hasAttribute('placeHolder'))
+    popupNameField.removeAttribute('placeHolder');
+  if (popupDescriptionField.hasAttribute('placeHolder'))
+    popupDescriptionField.removeAttribute('placeHolder');
   popupTitle.textContent = 'Редактировать профиль';
   popupNameField.value = profileName.textContent;
   popupDescriptionField.value = profileDescription.textContent;
