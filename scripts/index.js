@@ -46,16 +46,12 @@ const EDIT_PROFILE = 'editProfile';
 const ADD_CARD = 'addCard;'
 
 function editProfileInfo() {
-  openEditForm();
+  togglePopup();
   setPopupEditProfileMode();
 }
 
-function openEditForm() {
-  popup.classList.add('popup_opened');
-}
-
-function closeEditForm() {
-  popup.classList.remove('popup_opened');
+function togglePopup() {
+  popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler(evt) {
@@ -69,16 +65,18 @@ function formSubmitHandler(evt) {
     placesList.prepend(createNewCardItem(popupNameField.value, popupDescriptionField.value));
   }
 
-  closeEditForm();
+  togglePopup();
 }
 
 function addCardItem() {
-  openEditForm();
+  togglePopup();
   setPopupAddCardMode();
 }
 
 function setPopupAddCardMode() {
   popupMode = ADD_CARD;
+  popupNameField.value = null;
+  popupDescriptionField.value = null;
   popupTitle.textContent = 'Новое место';
   popupNameField.setAttribute('placeHolder', 'Название');
   popupDescriptionField.setAttribute('placeHolder', 'Ссылка на картинку');
@@ -104,8 +102,18 @@ function createNewCardItem(name, link) {
   placePic.setAttribute('src', link);
   placePic.setAttribute('alt', 'Достопримечательность');
   newCardItem.querySelector('.place__title').textContent = name;
+  addCardListeners(newCardItem);
 
   return newCardItem;
+}
+
+function addCardListeners(cardItem) {
+  cardItem.querySelector('.place__like-button').addEventListener('click', likeCard);
+}
+
+function likeCard(evt) {
+  const likeButton = evt.target.closest('.place__like-button');
+  likeButton.classList.toggle('place__like-button_active');
 }
 
 initialCards.forEach((item) => {
@@ -114,5 +122,5 @@ initialCards.forEach((item) => {
 
 profileEditButton.addEventListener('click', editProfileInfo);
 profileAddButton.addEventListener('click', addCardItem);
-popupCloseButton.addEventListener('click', closeEditForm);
+popupCloseButton.addEventListener('click', togglePopup);
 popupForm.addEventListener('submit', formSubmitHandler);
