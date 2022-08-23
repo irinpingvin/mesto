@@ -1,9 +1,9 @@
-.popup__input_text_description {
+.popup__input_text_info {
   margin: 0 0 45px;
 }
 
 @media screen and (min-width: 1024px) {
-  .popup__input_text_description {
+  .popup__input_text_info {
     margin-bottom: 48px;
   }
 }

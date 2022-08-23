@@ -1,8 +1,8 @@
 .place__pic {
-  max-width: 282px;
-  max-height: 282px;
-  object-fit: contain;
-  border-radius: 10px 10px 0px 0px;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
   grid-area: places__pic;
   margin: 0;
 }

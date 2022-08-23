@@ -4,16 +4,16 @@ const initialCards = [
     link: './images/places__bogdo.png'
   },
   {
-    name: 'Домбай',
-    link: './images/places__dombay.png'
+    name: 'Москва Сити',
+    link: './images/places__moscow.png'
   },
   {
     name: 'Куршская коса',
     link: './images/places__curonian-spit.png'
   },
   {
-    name: 'Гора Эльбрус',
-    link: './images/places__elbrus.png'
+    name: 'Териберка',
+    link: './images/places__teriberka.png'
   },
   {
     name: 'Парк Рускеала',
@@ -26,12 +26,12 @@ const initialCards = [
 ];
 
 const userInputPopup = document.querySelector('.popup_type_user-input');
-const popupForm = userInputPopup.querySelector('.popup__form');
-const popupNameField = userInputPopup.querySelector('.popup__input_text_name');
-const popupDescriptionField = userInputPopup.querySelector('.popup__input_text_description');
-const popupTitle = userInputPopup.querySelector('.popup__title');
+const userInputPopupForm = userInputPopup.querySelector('.popup__form');
+const userInputPopupNameField = userInputPopup.querySelector('.popup__input_text_name');
+const userInputPopupInfoField = userInputPopup.querySelector('.popup__input_text_info');
+const userInputPopupTitle = userInputPopup.querySelector('.popup__title');
 const userInputPopupCloseButton = userInputPopup.querySelector('.popup__close-button');
-const popupSubmitButton = userInputPopup.querySelector('.popup__submit-button');
+const userInputPopupSubmitButton = userInputPopup.querySelector('.popup__submit-button');
 
 let userInputPopupMode = null;
 const EDIT_PROFILE = 'editProfile';
@@ -53,19 +53,19 @@ function editProfileInfo() {
   setPopupEditProfileMode();
 }
 
-function togglePopup(elem) {
-  elem.classList.toggle('popup_opened');
+function togglePopup(popup) {
+  popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
   if (userInputPopupMode === EDIT_PROFILE) {
-    profileName.textContent = popupNameField.value;
-    profileDescription.textContent = popupDescriptionField.value;
+    profileName.textContent = userInputPopupNameField.value;
+    profileDescription.textContent = userInputPopupInfoField.value;
   }
   else if (userInputPopupMode === ADD_CARD) {
-    placesList.prepend(createNewCardItem(popupNameField.value, popupDescriptionField.value));
+    placesList.prepend(createNewCardItem(userInputPopupNameField.value, userInputPopupInfoField.value));
   }
 
   togglePopup(userInputPopup);
@@ -78,24 +78,26 @@ function addCardItem() {
 
 function setPopupAddCardMode() {
   userInputPopupMode = ADD_CARD;
-  popupNameField.value = null;
-  popupDescriptionField.value = null;
-  popupTitle.textContent = 'Новое место';
-  popupNameField.setAttribute('placeHolder', 'Название');
-  popupDescriptionField.setAttribute('placeHolder', 'Ссылка на картинку');
-  popupSubmitButton.textContent = 'Создать';
+  userInputPopupNameField.value = null;
+  userInputPopupInfoField.value = null;
+  userInputPopupTitle.textContent = 'Новое место';
+  userInputPopupNameField.setAttribute('placeHolder', 'Название');
+  userInputPopupInfoField.setAttribute('placeHolder', 'Ссылка на картинку');
+  userInputPopupSubmitButton.textContent = 'Создать';
 }
 
 function setPopupEditProfileMode() {
   userInputPopupMode = EDIT_PROFILE;
-  if (popupNameField.hasAttribute('placeHolder'))
-    popupNameField.removeAttribute('placeHolder');
-  if (popupDescriptionField.hasAttribute('placeHolder'))
-    popupDescriptionField.removeAttribute('placeHolder');
-  popupTitle.textContent = 'Редактировать профиль';
-  popupNameField.value = profileName.textContent;
-  popupDescriptionField.value = profileDescription.textContent;
-  popupSubmitButton.textContent = 'Сохранить';
+
+  if (userInputPopupNameField.hasAttribute('placeHolder'))
+    userInputPopupNameField.removeAttribute('placeHolder');
+  if (userInputPopupInfoField.hasAttribute('placeHolder'))
+    userInputPopupInfoField.removeAttribute('placeHolder');
+
+  userInputPopupTitle.textContent = 'Редактировать профиль';
+  userInputPopupNameField.value = profileName.textContent;
+  userInputPopupInfoField.value = profileDescription.textContent;
+  userInputPopupSubmitButton.textContent = 'Сохранить';
 }
 
 function likeCard(evt) {
@@ -125,8 +127,9 @@ function createNewCardItem(name, link) {
   const templateElement = document.querySelector('.template');
   const newCardItem = templateElement.content.cloneNode(true);
   const placePic = newCardItem.querySelector('.place__pic');
+
   placePic.setAttribute('src', link);
-  placePic.setAttribute('alt', 'Достопримечательность');
+  placePic.setAttribute('alt', `Достопримечательность ${name}`);
   newCardItem.querySelector('.place__title').textContent = name;
   addCardListeners(newCardItem);
 
@@ -151,4 +154,4 @@ userInputPopupCloseButton.addEventListener('click', () => {
 placePopupCloseButton.addEventListener('click', () => {
   togglePopup(placePopup);
 })
-popupForm.addEventListener('submit', formSubmitHandler);
+userInputPopupForm.addEventListener('submit', formSubmitHandler);
