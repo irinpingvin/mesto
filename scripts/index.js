@@ -113,8 +113,8 @@ function removeCard(evt) {
 function openCard(evt) {
   const cardElement = evt.target.closest('.place');
   const cardPicture = cardElement.querySelector('.place__pic');
-  const popupImage = placePopup.querySelector('.popup-place__image');
-  const popupCaption = placePopup.querySelector('.popup-place__caption');
+  const popupImage = placePopup.querySelector('.popup__image');
+  const popupCaption = placePopup.querySelector('.popup__caption');
 
   togglePopup(placePopup);
 
