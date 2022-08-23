@@ -34,8 +34,8 @@ const userInputPopupCloseButton = userInputPopup.querySelector('.popup__close-bu
 const userInputPopupSubmitButton = userInputPopup.querySelector('.popup__submit-button');
 
 let userInputPopupMode = null;
-const EDIT_PROFILE = 'editProfile';
-const ADD_CARD = 'addCard;'
+const EDIT_PROFILE = 'EDIT_PROFILE';
+const ADD_CARD = 'ADD_CARD;'
 
 const placePopup = document.querySelector('.popup_type_place');
 const placePopupCloseButton = placePopup.querySelector('.popup__close-button');
