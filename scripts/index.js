@@ -76,8 +76,7 @@ function handleProfileSubmitForm(evt) {
 
 function openAddCardForm() {
   openPopup(cardPopup);
-  cardPopupNameField.value = null;
-  cardPopupInfoField.value = null;
+  cardPopupForm.reset();
 }
 
 function likeCard(evt) {
@@ -131,14 +130,8 @@ initialCards.forEach((item) => {
 
 profileEditButton.addEventListener('click', editProfileInfo);
 profileAddButton.addEventListener('click', openAddCardForm);
-profilePopupCloseButton.addEventListener('click', () => {
-  closePopup(profilePopup);
-});
-cardPopupCloseButton.addEventListener('click', () => {
-  closePopup(cardPopup);
-});
-imagePopupCloseButton.addEventListener('click', () => {
-  closePopup(imagePopup);
-})
 profilePopupForm.addEventListener('submit', handleProfileSubmitForm);
 cardPopupForm.addEventListener('submit', handleCardSubmitForm);
+
+const buttonsClose = document.querySelectorAll('.popup__close-button');
+buttonsClose.forEach(btn => btn.addEventListener('click', (event) => closePopup(event.target.closest('.popup'))));
