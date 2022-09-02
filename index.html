@@ -36,8 +36,10 @@
       <button class="popup__close-button" type="button"></button>
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" name="popup-submit-form">
-        <input type="text" name="popup-name" required class="popup__input popup__input_text_name">
-        <input type="text" name="popup-info" required class="popup__input popup__input_text_info">
+        <input type="text" name="popup-name" required class="popup__input popup__input_text_name" id="name-input" minlength="2" maxlength="40">
+        <span class="popup__input-error name-input-error"></span>
+        <input type="text" name="popup-info" required class="popup__input popup__input_text_info" id="info-input" minlength="2" maxlength="200">
+        <span class="popup__input-error info-input-error"></span>
         <button type="submit" class="popup__submit-button">Сохранить</button>
       </form>
     </div>
@@ -48,8 +50,10 @@
       <button class="popup__close-button" type="button"></button>
       <h3 class="popup__title">Новое место</h3>
       <form class="popup__form" name="popup-submit-form">
-        <input type="text" name="popup-card-name" required class="popup__input popup__input_text_name" placeholder="Название">
-        <input type="text" name="popup-card-link" required class="popup__input popup__input_text_info" placeholder="Ссылка на картинку">
+        <input type="text" name="popup-card-name" required class="popup__input popup__input_text_name" id="card-name-input" placeholder="Название" minlength="2" maxlength="30">
+        <span class="popup__input-error name-input-error card-name-input-error"></span>
+        <input type="url" name="popup-card-link" required class="popup__input popup__input_text_info" id="card-link-input" placeholder="Ссылка на картинку">
+        <span class="popup__input-error info-input-error card-link-input-error"></span>
         <button type="submit" class="popup__submit-button">Создать</button>
       </form>
     </div>
@@ -77,6 +81,7 @@
   </li>
 </template>
 
+<script src="./scripts/validate.js"></script>
 <script src="./scripts/index.js"></script>
 </body>
 </html>
