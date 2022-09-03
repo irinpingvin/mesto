@@ -59,7 +59,7 @@ const templateElement = document.querySelector('.template');
 
 function openPopup(popup, config) {
   popup.classList.add('popup_opened');
-  popup.addEventListener('keydown', () => handlePopupKeyDown(popup, config));
+  popup.addEventListener('keydown', handlePopupKeyDown(popup, config));
   popup.addEventListener('click', (event) => handlePopupMouseClick(event, popup, config));
   if (!popup.classList.contains('popup_type_image')) {
     disableButton(popup.querySelector(config.formSelector).querySelector(config.submitButtonSelector), config);
