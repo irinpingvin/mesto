@@ -28,10 +28,12 @@ function toggleButtonState(inputFieldList, buttonElement, config) {
 
 function enableButton(buttonElement, config) {
   buttonElement.classList.remove(config.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled');
 }
 
 function disableButton(buttonElement, config) {
   buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
 }
 
 function checkInputValidity(formElement, inputElement, config) {
@@ -60,5 +62,13 @@ function enableValidation(config) {
       evt.preventDefault();
     });
     setEventListener(formElement, config);
+  });
+}
+
+function resetPopupError(popup, config) {
+  const formElement = popup.querySelector(config.formSelector);
+  const inputElementList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  inputElementList.forEach(inputElement => {
+    hideInputError(formElement, inputElement, config);
   });
 }
