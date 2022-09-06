@@ -69,15 +69,9 @@ function closePopup(popup) {
   popup.removeEventListener('click', handlePopupMouseClick);
 }
 
-function resetPopupFormAndErrors(popup) {
-  if (!popup.classList.contains('popup_type_image')) {
-    popup.querySelector(validationConfig.formSelector).reset();
-    resetPopupError(popup, validationConfig);
-  }
-}
-
 function editProfileInfo() {
   openPopup(profilePopup);
+  resetPopupError(profilePopup, validationConfig);
   disableButton(profilePopupForm.querySelector(validationConfig.submitButtonSelector), validationConfig);
   profilePopupNameField.value = profileName.textContent;
   profilePopupInfoField.value = profileDescription.textContent;
@@ -90,11 +84,12 @@ function handleProfileSubmitForm(evt) {
   profileDescription.textContent = profilePopupInfoField.value;
 
   closePopup(profilePopup);
-  resetPopupFormAndErrors(profilePopup);
 }
 
 function openAddCardForm() {
   openPopup(cardPopup);
+  cardPopupForm.reset();
+  resetPopupError(cardPopup, validationConfig);
   disableButton(cardPopupForm.querySelector(validationConfig.submitButtonSelector), validationConfig);
 }
 
@@ -141,14 +136,12 @@ function handleCardSubmitForm(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createNewCardItem(cardPopupNameField.value, cardPopupInfoField.value));
   closePopup(cardPopup);
-  resetPopupFormAndErrors(cardPopup);
 }
 
 function handlePopupKeyDown(event) {
   if (event.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-    resetPopupFormAndErrors(openedPopup);
   }
 }
 
@@ -156,7 +149,6 @@ function handlePopupMouseClick(event) {
   if (event.target === event.currentTarget) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
-    resetPopupFormAndErrors(openedPopup);
   }
 }
 
@@ -170,10 +162,6 @@ profilePopupForm.addEventListener('submit', handleProfileSubmitForm);
 cardPopupForm.addEventListener('submit', handleCardSubmitForm);
 
 const buttonsClose = document.querySelectorAll('.popup__close-button');
-buttonsClose.forEach(btn => btn.addEventListener('click', (event) => {
-  const popup = event.target.closest('.popup');
-  closePopup(popup);
-  resetPopupFormAndErrors(popup);
-}));
+buttonsClose.forEach(btn => btn.addEventListener('click', (event) => closePopup(event.target.closest('.popup'), validationConfig)));
 
 enableValidation(validationConfig);
