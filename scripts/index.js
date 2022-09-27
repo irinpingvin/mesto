@@ -1,3 +1,8 @@
+import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
+
+export {openPopup};
+
 const initialCards = [
   {
     name: 'Гора Большое Богдо',
@@ -44,10 +49,6 @@ const cardPopupNameField = cardPopup.querySelector('.popup__input_text_name');
 const cardPopupInfoField = cardPopup.querySelector('.popup__input_text_info');
 const cardPopupForm = cardPopup.querySelector('.popup__form');
 
-const imagePopup = document.querySelector('.popup_type_image');
-const imagePopupPicture = imagePopup.querySelector('.popup__picture');
-const imagePopupCaption = imagePopup.querySelector('.popup__caption');
-
 const profile = document.querySelector('.profile');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 const profileAddButton = profile.querySelector('.profile__add-button');
@@ -93,48 +94,9 @@ function openAddCardForm() {
   disableButton(cardPopupForm.querySelector(validationConfig.submitButtonSelector), validationConfig);
 }
 
-function likeCard(evt) {
-  const likeButton = evt.target.closest('.place__like-button');
-  likeButton.classList.toggle('place__like-button_active');
-}
-
-function removeCard(evt) {
-  const cardElement = evt.target.closest('.place');
-  cardElement.remove();
-}
-
-function openCard(evt) {
-  const cardElement = evt.target.closest('.place');
-  const cardPicture = cardElement.querySelector('.place__pic');
-
-  openPopup(imagePopup);
-
-  imagePopupPicture.setAttribute('src', cardPicture.getAttribute('src'));
-  imagePopupPicture.setAttribute('alt', cardPicture.getAttribute('alt'));
-  imagePopupCaption.textContent = cardElement.querySelector('.place__title').textContent;
-}
-
-function createNewCardItem(name, link) {
-  const newCardItem = templateElement.content.cloneNode(true);
-  const placePic = newCardItem.querySelector('.place__pic');
-
-  placePic.setAttribute('src', link);
-  placePic.setAttribute('alt', `Достопримечательность ${name}`);
-  newCardItem.querySelector('.place__title').textContent = name;
-  addCardListeners(newCardItem);
-
-  return newCardItem;
-}
-
-function addCardListeners(cardItem) {
-  cardItem.querySelector('.place__like-button').addEventListener('click', likeCard);
-  cardItem.querySelector('.place__remove-button').addEventListener('click', removeCard);
-  cardItem.querySelector('.place__pic').addEventListener('click', (event) => openCard(event, validationConfig));
-}
-
 function handleCardSubmitForm(evt) {
   evt.preventDefault();
-  cardsContainer.prepend(createNewCardItem(cardPopupNameField.value, cardPopupInfoField.value));
+  cardsContainer.prepend(new Card(cardPopupNameField.value, cardPopupInfoField.value, templateElement).createNewCardItem());
   closePopup(cardPopup);
 }
 
@@ -153,7 +115,7 @@ function handlePopupMouseClick(event) {
 }
 
 initialCards.forEach((item) => {
-  cardsContainer.prepend(createNewCardItem(item.name, item.link));
+  cardsContainer.prepend(new Card(item.name, item.link, templateElement).createNewCardItem());
 });
 
 profileEditButton.addEventListener('click', editProfileInfo);
