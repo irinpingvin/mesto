@@ -58,6 +58,12 @@ const profileDescription = profile.querySelector('.profile__description');
 const cardsContainer = document.querySelector('.places__list');
 const templateElement = document.querySelector('.template');
 
+const cardFormValidator = new FormValidator(validationConfig, cardPopupForm);
+cardFormValidator.enableValidation();
+
+const profileFormValidator = new FormValidator(validationConfig, profilePopupForm);
+profileFormValidator.enableValidation();
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlePopupKeyDown);
@@ -72,8 +78,8 @@ function closePopup(popup) {
 
 function editProfileInfo() {
   openPopup(profilePopup);
-  resetPopupError(profilePopup, validationConfig);
-  disableButton(profilePopupForm.querySelector(validationConfig.submitButtonSelector), validationConfig);
+  profileFormValidator.resetPopupError();
+  profileFormValidator.disableButton(profilePopupForm.querySelector(validationConfig.submitButtonSelector));
   profilePopupNameField.value = profileName.textContent;
   profilePopupInfoField.value = profileDescription.textContent;
 }
@@ -90,8 +96,8 @@ function handleProfileSubmitForm(evt) {
 function openAddCardForm() {
   openPopup(cardPopup);
   cardPopupForm.reset();
-  resetPopupError(cardPopup, validationConfig);
-  disableButton(cardPopupForm.querySelector(validationConfig.submitButtonSelector), validationConfig);
+  cardFormValidator.resetPopupError();
+  cardFormValidator.disableButton(cardPopupForm.querySelector(validationConfig.submitButtonSelector));
 }
 
 function handleCardSubmitForm(evt) {
@@ -125,5 +131,3 @@ cardPopupForm.addEventListener('submit', handleCardSubmitForm);
 
 const buttonsClose = document.querySelectorAll('.popup__close-button');
 buttonsClose.forEach(btn => btn.addEventListener('click', (event) => closePopup(event.target.closest('.popup'), validationConfig)));
-
-enableValidation(validationConfig);
