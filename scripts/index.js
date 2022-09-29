@@ -1,43 +1,6 @@
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
-
-export {openPopup};
-
-const initialCards = [
-  {
-    name: 'Гора Большое Богдо',
-    link: './images/places__bogdo.png'
-  },
-  {
-    name: 'Москва Сити',
-    link: './images/places__moscow.png'
-  },
-  {
-    name: 'Куршская коса',
-    link: './images/places__curonian-spit.png'
-  },
-  {
-    name: 'Териберка',
-    link: './images/places__teriberka.png'
-  },
-  {
-    name: 'Парк Рускеала',
-    link: './images/places__ruskeala.png'
-  },
-  {
-    name: 'Кондуки',
-    link: './images/places__konduki.png'
-  }
-];
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+import {initialCards, validationConfig} from "../utils/constants.js";
 
 const profilePopup = document.querySelector('.popup_type_profile');
 const profilePopupForm = profilePopup.querySelector('.popup__form');
@@ -56,7 +19,6 @@ const profileName = profile.querySelector('.profile__name');
 const profileDescription = profile.querySelector('.profile__description');
 
 const cardsContainer = document.querySelector('.places__list');
-const templateElement = document.querySelector('.template');
 
 const cardFormValidator = new FormValidator(validationConfig, cardPopupForm);
 cardFormValidator.enableValidation();
@@ -78,8 +40,7 @@ function closePopup(popup) {
 
 function editProfileInfo() {
   openPopup(profilePopup);
-  profileFormValidator.resetPopupError();
-  profileFormValidator.disableButton(profilePopupForm.querySelector(validationConfig.submitButtonSelector));
+  profileFormValidator.resetValidation();
   profilePopupNameField.value = profileName.textContent;
   profilePopupInfoField.value = profileDescription.textContent;
 }
@@ -96,13 +57,18 @@ function handleProfileSubmitForm(evt) {
 function openAddCardForm() {
   openPopup(cardPopup);
   cardPopupForm.reset();
-  cardFormValidator.resetPopupError();
-  cardFormValidator.disableButton(cardPopupForm.querySelector(validationConfig.submitButtonSelector));
+  cardFormValidator.resetValidation();
 }
 
 function handleCardSubmitForm(evt) {
   evt.preventDefault();
-  cardsContainer.prepend(new Card(cardPopupNameField.value, cardPopupInfoField.value, templateElement).createNewCardItem());
+
+  const cardData = {
+    name: cardPopupNameField.value,
+    link: cardPopupInfoField.value
+  };
+  cardsContainer.prepend(createCard(cardData));
+
   closePopup(cardPopup);
 }
 
@@ -114,14 +80,28 @@ function handlePopupKeyDown(event) {
 }
 
 function handlePopupMouseClick(event) {
-  if (event.target === event.currentTarget) {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
+  closePopup(event.target);
+}
+
+function handleCardClick(name, link) {
+  const imagePopup = document.querySelector('.popup_type_image');
+  const imagePopupPicture = imagePopup.querySelector('.popup__picture');
+  const imagePopupCaption = imagePopup.querySelector('.popup__caption');
+
+  openPopup(imagePopup);
+
+  imagePopupPicture.setAttribute('src', link);
+  imagePopupPicture.setAttribute('alt', `Достопримечательность ${name}`);
+  imagePopupCaption.textContent = name;
+}
+
+function createCard(cardData) {
+  const card = new Card(cardData, '.template', handleCardClick);
+  return card.createNewCardItem();
 }
 
 initialCards.forEach((item) => {
-  cardsContainer.prepend(new Card(item.name, item.link, templateElement).createNewCardItem());
+  cardsContainer.prepend(createCard(item));
 });
 
 profileEditButton.addEventListener('click', editProfileInfo);

@@ -1,55 +1,48 @@
-import {openPopup} from "./index.js";
-
 export class Card {
-  #name;
-  #link;
-  #templateSelector;
+  #cardName;
+  #cardLink;
   #cardItem;
+  #cardPicture;
+  #cardTitle;
+  #templateSelector;
+  #handleCardClick;
+  #likeButton;
 
-  constructor(name, link, templateSelector) {
-    this.#name = name;
-    this.#link = link;
+  constructor(cardData, templateSelector, handleCardClick) {
+    this.#cardName = cardData.name;
+    this.#cardLink = cardData.link;
     this.#templateSelector = templateSelector;
+    this.#handleCardClick = handleCardClick;
   }
 
-  #likeCard(evt) {
-    const likeButton = evt.target.closest('.place__like-button');
-    likeButton.classList.toggle('place__like-button_active');
+  #likeCard() {
+    this.#likeButton.classList.toggle('place__like-button_active');
   }
 
-  #removeCard(evt) {
-    const cardElement = evt.target.closest('.place');
-    cardElement.remove();
-  }
-
-  #openCard(evt) {
-    const cardElement = evt.target.closest('.place');
-    const cardPicture = cardElement.querySelector('.place__pic');
-
-    const imagePopup = document.querySelector('.popup_type_image');
-    const imagePopupPicture = imagePopup.querySelector('.popup__picture');
-    const imagePopupCaption = imagePopup.querySelector('.popup__caption');
-
-    openPopup(imagePopup);
-
-    imagePopupPicture.setAttribute('src', cardPicture.getAttribute('src'));
-    imagePopupPicture.setAttribute('alt', cardPicture.getAttribute('alt'));
-    imagePopupCaption.textContent = cardElement.querySelector('.place__title').textContent;
+  #removeCard() {
+    this.#cardItem.remove();
+    this.#cardItem = null;
   }
 
   #addCardListeners() {
-    this.#cardItem.querySelector('.place__like-button').addEventListener('click', this.#likeCard.bind(this));
+    this.#likeButton.addEventListener('click', this.#likeCard.bind(this));
     this.#cardItem.querySelector('.place__remove-button').addEventListener('click', this.#removeCard.bind(this));
-    this.#cardItem.querySelector('.place__pic').addEventListener('click', this.#openCard.bind(this));
+    this.#cardPicture.addEventListener('click', () => {
+      this.#handleCardClick(this.#cardName, this.#cardLink)
+    });
   }
 
   createNewCardItem() {
-    this.#cardItem = this.#templateSelector.content.cloneNode(true);
-    const placePic = this.#cardItem.querySelector('.place__pic');
+    const templateElement = document.querySelector(this.#templateSelector);
 
-    placePic.setAttribute('src', this.#link);
-    placePic.setAttribute('alt', `Достопримечательность ${this.#name}`);
-    this.#cardItem.querySelector('.place__title').textContent = this.#name;
+    this.#cardItem = templateElement.content.querySelector('.place').cloneNode(true);
+    this.#likeButton = this.#cardItem.querySelector('.place__like-button');
+    this.#cardPicture = this.#cardItem.querySelector('.place__pic');
+    this.#cardTitle = this.#cardItem.querySelector('.place__title');
+
+    this.#cardPicture.setAttribute('src', this.#cardLink);
+    this.#cardPicture.setAttribute('alt', `Достопримечательность ${this.#cardName}`);
+    this.#cardTitle.textContent = this.#cardName;
     this.#addCardListeners();
 
     return this.#cardItem;
