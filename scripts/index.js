@@ -80,7 +80,9 @@ function handlePopupKeyDown(event) {
 }
 
 function handlePopupMouseClick(event) {
-  closePopup(event.target);
+  if (event.target === event.currentTarget) {
+    closePopup(event.target);
+  }
 }
 
 function handleCardClick(name, link) {

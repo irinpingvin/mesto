@@ -28,7 +28,7 @@ export class Card {
     this.#likeButton.addEventListener('click', this.#likeCard.bind(this));
     this.#cardItem.querySelector('.place__remove-button').addEventListener('click', this.#removeCard.bind(this));
     this.#cardPicture.addEventListener('click', () => {
-      this.#handleCardClick(this.#cardName, this.#cardLink)
+      this.#handleCardClick(this.#cardName, this.#cardLink);
     });
   }
 
