@@ -1,6 +1,7 @@
 import './index.css';
-import {Card} from "../scripts/Card.js";
-import {FormValidator} from "../scripts/FormValidator.js";
+import {Card} from "../components/Card.js";
+import {FormValidator} from "../components/FormValidator.js";
+import {Section} from "../components/Section.js";
 import {initialCards, validationConfig} from "../utils/constants.js";
 
 const profilePopup = document.querySelector('.popup_type_profile');
@@ -18,8 +19,6 @@ const profileEditButton = profile.querySelector('.profile__edit-button');
 const profileAddButton = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileDescription = profile.querySelector('.profile__description');
-
-const cardsContainer = document.querySelector('.places__list');
 
 const cardFormValidator = new FormValidator(validationConfig, cardPopupForm);
 cardFormValidator.enableValidation();
@@ -64,11 +63,11 @@ function openAddCardForm() {
 function handleCardSubmitForm(evt) {
   evt.preventDefault();
 
-  const cardData = {
+  const cardData = [{
     name: cardPopupNameField.value,
     link: cardPopupInfoField.value
-  };
-  cardsContainer.prepend(createCard(cardData));
+  }];
+  createCard(cardData);
 
   closePopup(cardPopup);
 }
@@ -99,13 +98,16 @@ function handleCardClick(name, link) {
 }
 
 function createCard(cardData) {
-  const card = new Card(cardData, '.template', handleCardClick);
-  return card.createNewCardItem();
+  const cardSection = new Section({items: cardData, renderer: (item) => {
+      const card = new Card(item, '.template', handleCardClick);
+      const cardItem = card.createNewCardItem();
+      cardSection.addItem(cardItem);
+    }}, '.places__list');
+
+  cardSection.rendererItems();
 }
 
-initialCards.forEach((item) => {
-  cardsContainer.prepend(createCard(item));
-});
+createCard(initialCards);
 
 profileEditButton.addEventListener('click', editProfileInfo);
 profileAddButton.addEventListener('click', openAddCardForm);
