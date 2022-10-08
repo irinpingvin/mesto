@@ -1,27 +1,34 @@
+import bogdoImage from '../images/places__bogdo.png';
+import moscowImage from '../images/places__moscow.png';
+import curonianSpitImage from '../images/places__curonian-spit.png';
+import teriberkaImage from '../images/places__teriberka.png';
+import ruskealaImage from '../images/places__ruskeala.png';
+import kondukiImage from '../images/places__konduki.png';
+
 const initialCards = [
   {
     name: 'Гора Большое Богдо',
-    link: './images/places__bogdo.png'
+    link: bogdoImage
   },
   {
     name: 'Москва Сити',
-    link: './images/places__moscow.png'
+    link: moscowImage
   },
   {
     name: 'Куршская коса',
-    link: './images/places__curonian-spit.png'
+    link: curonianSpitImage
   },
   {
     name: 'Териберка',
-    link: './images/places__teriberka.png'
+    link: teriberkaImage
   },
   {
     name: 'Парк Рускеала',
-    link: './images/places__ruskeala.png'
+    link: ruskealaImage
   },
   {
     name: 'Кондуки',
-    link: './images/places__konduki.png'
+    link: kondukiImage
   }
 ];
 

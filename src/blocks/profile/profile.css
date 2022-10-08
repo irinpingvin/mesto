@@ -20,6 +20,6 @@
     "profile__avatar profile__personal-data profile__add-button";
     justify-items: start;
     align-items: center;
-    gap: 0px 30px;
+    gap: 0 30px;
   }
 }
