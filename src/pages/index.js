@@ -4,12 +4,11 @@ import {FormValidator} from "../components/FormValidator.js";
 import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
+import {UserInfo} from "../components/UserInfo.js";
 import {initialCards, validationConfig} from "../utils/constants.js";
 
 const profilePopup = new PopupWithForm('.popup_type_profile', handleProfileSubmitForm);
 const profilePopupForm = profilePopup.getPopup().querySelector('.popup__form');
-const profilePopupNameField = profilePopup.getPopup().querySelector('.popup__input_text_name');
-const profilePopupInfoField = profilePopup.getPopup().querySelector('.popup__input_text_info');
 
 const cardPopup = new PopupWithForm('.popup_type_card', handleCardSubmitForm);
 const cardPopupNameField = cardPopup.getPopup().querySelector('.popup__input_text_name');
@@ -28,18 +27,20 @@ cardFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(validationConfig, profilePopupForm);
 profileFormValidator.enableValidation();
 
+const userData = new UserInfo({userNameSelector: '.popup__input_text_name', userInfoSelector: '.popup__input_text_info'});
+
 function editProfileInfo() {
   profilePopup.open();
   profileFormValidator.resetValidation();
-  profilePopupNameField.value = profileName.textContent;
-  profilePopupInfoField.value = profileDescription.textContent;
+  userData.setUserInfo(profileName.textContent, profileDescription.textContent);
 }
 
 function handleProfileSubmitForm(evt) {
   evt.preventDefault();
 
-  profileName.textContent = profilePopupNameField.value;
-  profileDescription.textContent = profilePopupInfoField.value;
+  const {userName, userInfo} = userData.getUserInfo();
+  profileName.textContent = userName;
+  profileDescription.textContent = userInfo;
 
   profilePopup.close();
 }
