@@ -9,13 +9,13 @@ export class UserInfo {
 
   getUserInfo() {
     return {
-      userName: this.#userName.value,
-      userInfo: this.#userInfo.value
+      userName: this.#userName.textContent,
+      userInfo: this.#userInfo.textContent
     };
   }
 
   setUserInfo(userName, userInfo) {
-    this.#userName.value = userName;
-    this.#userInfo.value = userInfo;
+    this.#userName.textContent = userName;
+    this.#userInfo.textContent = userInfo;
   }
 }
