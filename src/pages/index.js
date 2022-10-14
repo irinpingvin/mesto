@@ -39,6 +39,7 @@ const profileFormValidator = new FormValidator(validationConfig, profilePopupFor
 profileFormValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
+popupWithImage.setEventListeners();
 
 function editProfileInfo() {
   profilePopup.open();
@@ -55,7 +56,6 @@ function openAddCardForm() {
 }
 
 function handleCardClick(name, link) {
-  popupWithImage.setEventListeners();
   popupWithImage.open(name, link);
 }
 
