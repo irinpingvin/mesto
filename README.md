@@ -14,4 +14,4 @@
 
 Работа была выполнена по макету в Figma.
 
-Ознакомиться с проектом можно [по ссылке](https://irinpingvin.github.io/mesto/index.html).
+Ознакомиться с проектом можно [по ссылке](https://irinpingvin.github.io/mesto).
