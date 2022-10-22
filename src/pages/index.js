@@ -5,7 +5,15 @@ import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {UserInfo} from "../components/UserInfo.js";
-import {initialCards, validationConfig} from "../utils/constants.js";
+import {Api} from "../components/Api.js";
+import {initialCards, validationConfig, API_CONFIG} from "../utils/constants.js";
+
+const api = new Api(API_CONFIG);
+api.getUserInfo().then(data => {
+  document.querySelector('.profile__name').textContent = data.name;
+  document.querySelector('.profile__description').textContent = data.about;
+  document.querySelector('.profile__avatar').textContent = data.avatar;
+}).catch(error => console.log('Error while getting user information', error));
 
 const userData = new UserInfo({userNameSelector: '.profile__name', userInfoSelector: '.profile__description'});
 

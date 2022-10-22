@@ -41,4 +41,11 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 };
 
-export {initialCards, validationConfig};
+const API_CONFIG = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-52',
+  headers: {
+    authorization: '16f6b6a9-a8f1-4c03-8800-2744e7cbf369'
+  }
+}
+
+export {initialCards, validationConfig, API_CONFIG};
