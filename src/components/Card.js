@@ -2,9 +2,9 @@ export class Card {
   #cardName;
   #cardLink;
   #cardId;
+  #cardLikes;
   #cardItem;
   #cardPicture;
-  #cardTitle;
   #templateSelector;
   #handleCardClick;
   #likeButton;
@@ -13,6 +13,7 @@ export class Card {
     this.#cardName = cardData.name;
     this.#cardLink = cardData.link;
     this.#cardId = cardData.id;
+    this.#cardLikes = cardData.likes;
     this.#templateSelector = templateSelector;
     this.#handleCardClick = handleCardClick;
   }
@@ -39,12 +40,14 @@ export class Card {
 
     this.#cardItem = templateElement.content.querySelector('.place').cloneNode(true);
     this.#likeButton = this.#cardItem.querySelector('.place__like-button');
-    this.#cardPicture = this.#cardItem.querySelector('.place__pic');
-    this.#cardTitle = this.#cardItem.querySelector('.place__title');
 
+    this.#cardPicture = this.#cardItem.querySelector('.place__pic');
     this.#cardPicture.setAttribute('src', this.#cardLink);
     this.#cardPicture.setAttribute('alt', `Достопримечательность ${this.#cardName}`);
-    this.#cardTitle.textContent = this.#cardName;
+
+    this.#cardItem.querySelector('.place__title').textContent = this.#cardName;
+    this.#cardItem.querySelector('.place__like-counter').textContent = this.#cardLikes.length;
+
     this.#addCardListeners();
 
     return this.#cardItem;

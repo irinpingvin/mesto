@@ -37,7 +37,7 @@ api.getCards().then(cards => {
 });
 
 const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
-  const cardInfo = {name: formInputValues.title, link: formInputValues.link};
+  const cardInfo = {name: formInputValues.title, link: formInputValues.link, likes: []};
   api.addCard(cardInfo).then(() => {
     const cardItem = createCard(cardInfo);
     cardSection.addItem(cardItem);
