@@ -13,24 +13,28 @@ api.getUserInfo().then(data => {
   document.querySelector('.profile__name').textContent = data.name;
   document.querySelector('.profile__description').textContent = data.about;
   document.querySelector('.profile__avatar').textContent = data.avatar;
-}).catch(error => console.log('Error while getting user information', error));
+});
 
 const userData = new UserInfo({userNameSelector: '.profile__name', userInfoSelector: '.profile__description'});
 
 const profilePopup = new PopupWithForm('.popup_type_profile', (formInputValues) => {
-  userData.setUserInfo(formInputValues.name, formInputValues.info);
+  api.editUserInfo({name: formInputValues.name, about: formInputValues.info}).then(() => {
+    userData.setUserInfo(formInputValues.name, formInputValues.info);
+  });
 });
 const profilePopupForm = profilePopup.popup.querySelector('.popup__form');
 const profilePopupNameField = profilePopup.popup.querySelector('.popup__input_text_name');
 const profilePopupInfoField = profilePopup.popup.querySelector('.popup__input_text_info');
 
+let cardSection;
+
 api.getCards().then(cards => {
-  const cardSection = new Section({items: cards, renderer: (item) => {
+  cardSection = new Section({items: cards, renderer: (item) => {
       const cardItem = createCard(item);
       cardSection.addItem(cardItem);
     }}, '.places__list');
   cardSection.rendererItems();
-})
+});
 
 const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
   const cardItem = createCard({name: formInputValues.title, link: formInputValues.link});
