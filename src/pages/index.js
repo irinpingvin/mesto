@@ -6,7 +6,7 @@ import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {Api} from "../components/Api.js";
-import {initialCards, validationConfig, API_CONFIG} from "../utils/constants.js";
+import {validationConfig, API_CONFIG} from "../utils/constants.js";
 
 const api = new Api(API_CONFIG);
 api.getUserInfo().then(data => {
@@ -24,11 +24,13 @@ const profilePopupForm = profilePopup.popup.querySelector('.popup__form');
 const profilePopupNameField = profilePopup.popup.querySelector('.popup__input_text_name');
 const profilePopupInfoField = profilePopup.popup.querySelector('.popup__input_text_info');
 
-const cardSection = new Section({items: initialCards, renderer: (item) => {
-    const cardItem = createCard(item);
-    cardSection.addItem(cardItem);
-  }}, '.places__list');
-cardSection.rendererItems();
+api.getCards().then(cards => {
+  const cardSection = new Section({items: cards, renderer: (item) => {
+      const cardItem = createCard(item);
+      cardSection.addItem(cardItem);
+    }}, '.places__list');
+  cardSection.rendererItems();
+})
 
 const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
   const cardItem = createCard({name: formInputValues.title, link: formInputValues.link});

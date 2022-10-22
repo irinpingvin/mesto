@@ -1,6 +1,7 @@
 export class Card {
   #cardName;
   #cardLink;
+  #cardId;
   #cardItem;
   #cardPicture;
   #cardTitle;
@@ -11,6 +12,7 @@ export class Card {
   constructor(cardData, templateSelector, handleCardClick) {
     this.#cardName = cardData.name;
     this.#cardLink = cardData.link;
+    this.#cardId = cardData.id;
     this.#templateSelector = templateSelector;
     this.#handleCardClick = handleCardClick;
   }
