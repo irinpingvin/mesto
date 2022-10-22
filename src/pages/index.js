@@ -37,8 +37,11 @@ api.getCards().then(cards => {
 });
 
 const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
-  const cardItem = createCard({name: formInputValues.title, link: formInputValues.link});
-  cardSection.addItem(cardItem);
+  const cardInfo = {name: formInputValues.title, link: formInputValues.link};
+  api.addCard(cardInfo).then(() => {
+    const cardItem = createCard(cardInfo);
+    cardSection.addItem(cardItem);
+  });
 });
 const cardPopupForm = cardPopup.popup.querySelector('.popup__form');
 

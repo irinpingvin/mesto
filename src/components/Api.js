@@ -1,9 +1,11 @@
 export class Api {
-  #url;
+  #userUrl;
+  #cardsUrl;
   #headers;
 
-  constructor({url, headers}) {
-    this.#url = url;
+  constructor({userUrl, cardsUrl, headers}) {
+    this.#userUrl = userUrl;
+    this.#cardsUrl = cardsUrl;
     this.#headers = headers;
   }
 
@@ -17,11 +19,11 @@ export class Api {
   }
 
   getUserInfo() {
-    return this.#handleServerResponse(fetch(`${this.#url}/users/me`, {headers: this.#headers}));
+    return this.#handleServerResponse(fetch(this.#userUrl, {headers: this.#headers}));
   }
 
   editUserInfo(userInfo) {
-    return this.#handleServerResponse(fetch(`${this.#url}/users/me`, {
+    return this.#handleServerResponse(fetch(this.#userUrl, {
       method: 'PATCH',
       headers: this.#headers,
       body: JSON.stringify(userInfo)
@@ -29,6 +31,14 @@ export class Api {
   }
 
   getCards() {
-    return this.#handleServerResponse(fetch(`${this.#url}/cards`, {headers: this.#headers}));
+    return this.#handleServerResponse(fetch(this.#cardsUrl, {headers: this.#headers}));
+  }
+
+  addCard(cardInfo) {
+    return this.#handleServerResponse(fetch(this.#cardsUrl, {
+      method: 'POST',
+      headers: this.#headers,
+      body: JSON.stringify(cardInfo)
+    }));
   }
 }
