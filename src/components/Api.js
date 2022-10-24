@@ -41,4 +41,11 @@ export class Api {
       body: JSON.stringify(cardInfo)
     }));
   }
+
+  removeCard(id) {
+    return this.#handleServerResponse(fetch(`${this.#cardsUrl}/${id}`, {
+      method: 'DELETE',
+      headers: this.#headers
+    }));
+  }
 }

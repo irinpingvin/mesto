@@ -4,15 +4,19 @@ import {FormValidator} from "../components/FormValidator.js";
 import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
+import {PopupCardDeleteConfirmation} from "../components/PopupCardDeleteConfirmation.js";
 import {UserInfo} from "../components/UserInfo.js";
 import {Api} from "../components/Api.js";
 import {validationConfig, API_CONFIG} from "../utils/constants.js";
+
+let userId;
 
 const api = new Api(API_CONFIG);
 api.getUserInfo().then(data => {
   document.querySelector('.profile__name').textContent = data.name;
   document.querySelector('.profile__description').textContent = data.about;
   document.querySelector('.profile__avatar').textContent = data.avatar;
+  userId = data._id;
 });
 
 const userData = new UserInfo({userNameSelector: '.profile__name', userInfoSelector: '.profile__description'});
@@ -37,9 +41,8 @@ api.getCards().then(cards => {
 });
 
 const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
-  const cardInfo = {name: formInputValues.title, link: formInputValues.link, likes: []};
-  api.addCard(cardInfo).then(() => {
-    const cardItem = createCard(cardInfo);
+  api.addCard({name: formInputValues.title, link: formInputValues.link}).then(data => {
+    const cardItem = createCard(data);
     cardSection.addItem(cardItem);
   });
 });
@@ -57,6 +60,12 @@ profileFormValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
 popupWithImage.setEventListeners();
+
+const popupWithConfirmation = new PopupCardDeleteConfirmation('.popup_type_confirm', (cardId, cardItem) => {
+  api.removeCard(cardId).then(() => {
+    cardItem.remove();
+  });
+});
 
 function editProfileInfo() {
   profilePopup.open();
@@ -76,8 +85,12 @@ function handleCardClick(name, link) {
   popupWithImage.open(name, link);
 }
 
+function handleRemoveClick(id, cardItem) {
+  popupWithConfirmation.open(id, cardItem);
+}
+
 function createCard(cardData) {
-  const card = new Card(cardData, '.template', handleCardClick);
+  const card = new Card(cardData, userId, '.template', handleCardClick, handleRemoveClick);
   return card.createNewCardItem();
 }
 
@@ -85,3 +98,4 @@ profileEditButton.addEventListener('click', editProfileInfo);
 profileAddButton.addEventListener('click', openAddCardForm);
 profilePopup.setEventListeners();
 cardPopup.setEventListeners();
+popupWithConfirmation.setEventListeners();

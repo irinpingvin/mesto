@@ -9,6 +9,7 @@
   height: 19px;
   transition: opacity 0.2s linear;
   padding: 0;
+  visibility: hidden;
 }
 
 .place__remove-button:hover {
