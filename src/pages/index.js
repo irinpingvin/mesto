@@ -89,8 +89,19 @@ function handleRemoveClick(id, cardItem) {
   popupWithConfirmation.open(id, cardItem);
 }
 
+function handleLikeCard(id, card, isLiked) {
+  if (isLiked)
+    api.dislikeCard(id).then(data => {
+      card.likeCard(data.likes);
+    });
+  else
+    api.likeCard(id).then(data => {
+      card.likeCard(data.likes);
+    });
+}
+
 function createCard(cardData) {
-  const card = new Card(cardData, userId, '.template', handleCardClick, handleRemoveClick);
+  const card = new Card(cardData, userId, '.template', handleCardClick, handleRemoveClick, handleLikeCard);
   return card.createNewCardItem();
 }
 

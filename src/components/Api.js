@@ -48,4 +48,18 @@ export class Api {
       headers: this.#headers
     }));
   }
+
+  likeCard(id) {
+    return this.#handleServerResponse(fetch(`${this.#cardsUrl}/${id}/likes`, {
+      method: 'PUT',
+      headers: this.#headers
+    }));
+  }
+
+  dislikeCard(id) {
+    return this.#handleServerResponse(fetch(`${this.#cardsUrl}/${id}/likes`, {
+      method: 'DELETE',
+      headers: this.#headers
+    }));
+  }
 }
