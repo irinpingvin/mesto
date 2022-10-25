@@ -30,6 +30,14 @@ export class Api {
     }));
   }
 
+  editUserAvatar(avatarInfo) {
+    return this.#handleServerResponse(fetch(`${this.#userUrl}/avatar`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify(avatarInfo)
+    }));
+  }
+
   getCards() {
     return this.#handleServerResponse(fetch(this.#cardsUrl, {headers: this.#headers}));
   }

@@ -15,7 +15,8 @@ const api = new Api(API_CONFIG);
 api.getUserInfo().then(data => {
   document.querySelector('.profile__name').textContent = data.name;
   document.querySelector('.profile__description').textContent = data.about;
-  document.querySelector('.profile__avatar').textContent = data.avatar;
+  profileAvatar.setAttribute('src', data.avatar);
+  profileAvatar.setAttribute('alt', 'Аватар пользователя');
   userId = data._id;
 });
 
@@ -51,12 +52,25 @@ const cardPopupForm = cardPopup.popup.querySelector('.popup__form');
 const profile = document.querySelector('.profile');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 const profileAddButton = profile.querySelector('.profile__add-button');
+const avatarEditButton = profile.querySelector('.profile__avatar-edit-button');
+const profileAvatar = profile.querySelector('.profile__avatar');
+
+const avatarPopup = new PopupWithForm('.popup_type_avatar', (formInputValues) => {
+  api.editUserAvatar({avatar: formInputValues.avatar}).then((data) => {
+    profileAvatar.setAttribute('src', data.avatar);
+    profileAvatar.setAttribute('alt', 'Аватар пользователя');
+  });
+});
+const avatarPopupForm = avatarPopup.popup.querySelector('.popup__form');
 
 const cardFormValidator = new FormValidator(validationConfig, cardPopupForm);
 cardFormValidator.enableValidation();
 
 const profileFormValidator = new FormValidator(validationConfig, profilePopupForm);
 profileFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(validationConfig, avatarPopupForm);
+avatarFormValidator.enableValidation();
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
 popupWithImage.setEventListeners();
@@ -74,6 +88,11 @@ function editProfileInfo() {
   const {userName, userInfo} = userData.getUserInfo();
   profilePopupNameField.value = userName;
   profilePopupInfoField.value = userInfo;
+}
+
+function editAvatar() {
+  avatarPopup.open();
+  avatarFormValidator.resetValidation();
 }
 
 function openAddCardForm() {
@@ -107,6 +126,8 @@ function createCard(cardData) {
 
 profileEditButton.addEventListener('click', editProfileInfo);
 profileAddButton.addEventListener('click', openAddCardForm);
+avatarEditButton.addEventListener('click', editAvatar);
 profilePopup.setEventListeners();
 cardPopup.setEventListeners();
+avatarPopup.setEventListeners();
 popupWithConfirmation.setEventListeners();
