@@ -28,6 +28,7 @@ const profilePopup = new PopupWithForm('.popup_type_profile', (formInputValues) 
   submitButton.textContent = 'Сохранение...';
   api.editUserInfo({name: formInputValues.name, about: formInputValues.info}).then(() => {
     userData.setUserInfo(formInputValues.name, formInputValues.info);
+    profilePopup.close();
   })
     .catch(error => console.log(error))
     .finally(() => submitButton.textContent = 'Сохранить');
@@ -59,6 +60,7 @@ const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
   api.addCard({name: formInputValues.title, link: formInputValues.link}).then(data => {
     const cardItem = createCard(data);
     cardSection.addItem(cardItem);
+    cardPopup.close();
   })
     .catch(error => console.log(error))
     .finally(() => submitButton.textContent = 'Создать');
@@ -71,6 +73,7 @@ const avatarPopup = new PopupWithForm('.popup_type_avatar', (formInputValues) =>
   api.editUserAvatar({avatar: formInputValues.avatar}).then((data) => {
     profileAvatar.setAttribute('src', data.avatar);
     profileAvatar.setAttribute('alt', 'Аватар пользователя');
+    profileAvatar.close();
   })
     .catch(error => console.log(error))
     .finally(() => submitButton.textContent = 'Сохранить');
