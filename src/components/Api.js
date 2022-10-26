@@ -15,7 +15,6 @@ export class Api {
         return response.json();
       return Promise.reject(`Ошибка: ${response.status}`);
     })
-      .catch(error => console.log(error));
   }
 
   getUserInfo() {

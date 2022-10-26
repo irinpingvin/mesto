@@ -1,6 +1,6 @@
 import {Popup} from "./Popup.js";
 
-export class PopupCardDeleteConfirmation extends Popup {
+export class PopupWithConfirmation extends Popup {
   #submitButton;
   #handleConfirmation;
   #cardId;
