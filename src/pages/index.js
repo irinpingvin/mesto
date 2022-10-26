@@ -23,9 +23,12 @@ api.getUserInfo().then(data => {
 const userData = new UserInfo({userNameSelector: '.profile__name', userInfoSelector: '.profile__description'});
 
 const profilePopup = new PopupWithForm('.popup_type_profile', (formInputValues) => {
+  const submitButton = profilePopup.popup.querySelector('.popup__submit-button');
+  submitButton.textContent = 'Сохранение...';
   api.editUserInfo({name: formInputValues.name, about: formInputValues.info}).then(() => {
     userData.setUserInfo(formInputValues.name, formInputValues.info);
-  });
+  })
+    .finally(() => submitButton.textContent = 'Сохранить');
 });
 const profilePopupForm = profilePopup.popup.querySelector('.popup__form');
 const profilePopupNameField = profilePopup.popup.querySelector('.popup__input_text_name');
@@ -42,10 +45,12 @@ api.getCards().then(cards => {
 });
 
 const cardPopup = new PopupWithForm('.popup_type_card', (formInputValues) => {
+  const submitButton = cardPopup.popup.querySelector('.popup__submit-button');
+  submitButton.textContent = 'Создание...';
   api.addCard({name: formInputValues.title, link: formInputValues.link}).then(data => {
     const cardItem = createCard(data);
     cardSection.addItem(cardItem);
-  });
+  }).finally(() => submitButton.textContent = 'Создать');
 });
 const cardPopupForm = cardPopup.popup.querySelector('.popup__form');
 
@@ -56,10 +61,12 @@ const avatarEditButton = profile.querySelector('.profile__avatar-edit-button');
 const profileAvatar = profile.querySelector('.profile__avatar');
 
 const avatarPopup = new PopupWithForm('.popup_type_avatar', (formInputValues) => {
+  const submitButton = avatarPopup.popup.querySelector('.popup__submit-button');
+  submitButton.textContent = 'Сохранение...';
   api.editUserAvatar({avatar: formInputValues.avatar}).then((data) => {
     profileAvatar.setAttribute('src', data.avatar);
     profileAvatar.setAttribute('alt', 'Аватар пользователя');
-  });
+  }).finally(() => submitButton.textContent = 'Сохранить');
 });
 const avatarPopupForm = avatarPopup.popup.querySelector('.popup__form');
 
