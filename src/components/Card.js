@@ -27,23 +27,31 @@ export class Card {
     this.#handleLikeCard = handleLikeCard;
   }
 
-  likeCard(likes) {
-    this.#likeButton.classList.toggle('place__like-button_active');
-    this.#cardLikeCounter.textContent = likes.length;
-  }
-
   #addCardListeners() {
     this.#likeButton.addEventListener('click', () => {
-      if (this.#likeButton.classList.contains('place__like-button_active'))
-        this.#handleLikeCard(this.#cardId, this, true);
-      else this.#handleLikeCard(this.#cardId, this, false);
+      this.#handleLikeCard(this.#cardId, this, this.#isCardLiked());
     });
     this.#cardItem.querySelector('.place__remove-button').addEventListener('click', () => {
-      this.#handleRemoveClick(this.#cardId, this.#cardItem);
+      this.#handleRemoveClick(this.#cardId, this);
     });
     this.#cardPicture.addEventListener('click', () => {
       this.#handleCardClick(this.#cardName, this.#cardLink);
     });
+  }
+
+  #isCardLiked() {
+    return this.#cardLikes.some(like => { return this.#userId === like._id })
+  }
+
+  likeCard(likes) {
+    this.#cardLikes = likes;
+    this.#likeButton.classList.toggle('place__like-button_active');
+    this.#cardLikeCounter.textContent = this.#cardLikes.length;
+  }
+
+  removeCard() {
+    this.#cardItem.remove();
+    this.#cardItem.innerHTML = "";
   }
 
   createNewCardItem() {
@@ -59,7 +67,7 @@ export class Card {
     this.#cardItem.querySelector('.place__title').textContent = this.#cardName;
     this.#cardLikeCounter = this.#cardItem.querySelector('.place__like-counter');
 
-    if (this.#cardLikes.some(like => { return this.#userId === like._id }))
+    if (this.#isCardLiked())
       this.likeCard(this.#cardLikes);
     else this.#cardLikeCounter.textContent = this.#cardLikes.length;
 

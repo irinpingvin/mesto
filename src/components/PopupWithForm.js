@@ -5,12 +5,14 @@ export class PopupWithForm extends Popup {
   #popupSubmitForm;
   #inputValues = {};
   #inputsList;
+  #submitButton;
 
   constructor(popupSelector, handleSubmitForm) {
     super(popupSelector);
     this.#handleSubmitForm = handleSubmitForm;
     this.#popupSubmitForm = this.popup.querySelector('.popup__form');
     this.#inputsList = Array.from(this.#popupSubmitForm.querySelectorAll('.popup__input'));
+    this.#submitButton = this.popup.querySelector('.popup__submit-button');
   }
 
   #getInputValues() {
@@ -31,5 +33,9 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     this.#popupSubmitForm.reset();
+  }
+
+  setSubmitButtonText(text) {
+    this.#submitButton.textContent = text;
   }
 }
