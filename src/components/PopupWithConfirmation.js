@@ -22,7 +22,6 @@ export class PopupWithConfirmation extends Popup {
     super.setEventListeners();
     this.#submitButton.addEventListener('click', () => {
       this.#handleConfirmation(this.#cardId, this.#cardItem);
-      this.close();
     });
   }
 }

@@ -86,6 +86,7 @@ popupWithImage.setEventListeners();
 const popupWithConfirmation = new PopupWithConfirmation('.popup_type_confirm', (cardId, card) => {
   api.removeCard(cardId).then(() => {
     card.removeCard();
+    popupWithConfirmation.close();
   })
     .catch(error => console.log(error));
 });
